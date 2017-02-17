@@ -40,6 +40,8 @@ def main():
 	zombie = sentientBeings.Zombie()
 	print(zombie)
 	print(zombie.hasImmunityTo("poisoned"))
+	print("zombie's initiative:",zombie.initiative)
+	print("cat's initiative:",cat.initiative)
 
 
 # def pick(item, inventory):

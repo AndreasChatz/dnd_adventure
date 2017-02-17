@@ -9,16 +9,21 @@ class SentientBeing(object):
 		self.ac = ac
 		self.hp = hp
 		self.speed = speed
+
 		self.str = str
 		self.dex = dex
 		self.con = con
 		self.int = int
 		self.wis = wis
 		self.cha = cha
+
 		self.toHit = toHit
 		self.dmg = dmg
 		self.perseption = perseption
 		self.passivePers = passivePers
+
+		self.bonusInitiative = 0
+		self.initiative = self.attributeModifier(dex)
 
 
 	def attributeModifier(self, attribute):
@@ -26,6 +31,9 @@ class SentientBeing(object):
 
 	def hasImmunityTo(self, type):
 		return True if type in self.immunities else False
+
+	def hasSense(self, type):
+		return True if type in self.senses else False
 
 	def __str__(self):
 		return f"It's a {self.size} {self.race}."
