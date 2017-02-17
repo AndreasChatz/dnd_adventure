@@ -1,3 +1,5 @@
+from itertools import count
+
 class Item(object):
 	"""Base item class"""
 	def __init__(self, name, description, value):
@@ -32,12 +34,13 @@ class Currency(Item):
 
 class Weapon(Item):
 	"""Weapon base class"""
-	def __init__(self, name, description, value, damage):
+	def __init__(self, name, description, value, damage, type):
 		self.damage = damage
+		self.type = type
 		super(Weapon, self).__init__(name, description, value)
 
 	def __str__(self):
-		return f"{'-'*44}\n{self.name}\n\nDescription: {self.description}\nDamage: {self.damage}\nValue: {self.value}\n{'-'*44}"
+		return f"{'-'*44}\n{self.name}({self.type})({self._count})\n\nDescription: {self.description}\nDamage: {self.damage}\nValue: {self.value}\n{'-'*44}"
 
 
 class Armor(Item):
@@ -85,11 +88,27 @@ class Rock(Item):
 
 class Dagger(Weapon):
 	"""Dagger class"""
+	_count = 0
 	def __init__(self):
+		Dagger._count += 1
 		super(Dagger, self).__init__(name = 'Dagger',
 			description = 'A small dagger',
 			damage = 'd4',
+			type = 'Simple Melee Weapon',
 			value = 2)
+		
+
+class Scimitar(Weapon):
+	"""Scimitar class"""
+	_count = 0
+	def __init__(self):
+		Scimitar._count += 1
+		super(Scimitar, self).__init__(name = 'Scimitar',
+			description = 'A backsword with a curved blade',
+			damage = 'd6',
+			type = 'Martial Melee Weapon',
+			value = 25)
+
 		
 
 		
