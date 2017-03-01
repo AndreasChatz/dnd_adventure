@@ -73,6 +73,7 @@ def main():
 	# 	print(x.name)
 	# fighter.show_inventory()
 	# fighter.doff_item('Chain Mail')
+	fighter.calculateAC()
 	print('AC',fighter.ac)
 	fighter.show_inventory()
 	print('don Assassin Suit')

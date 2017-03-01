@@ -77,8 +77,10 @@ class Player(SentientBeing):
 
 
 	def calculateAC(self):
-		sum_items_ac = 0
+		# sum_items_ac = 0
 		ac_bonus_from_dex = self.attributeModifier(self.dex)
+		sum_items_ac = 0 if 'body' in self.items_slots else 10
+
 		for item in self.wearing:
 			if items.Item.hasArmorAttribute(item):
 				if item.dex_max == 0:
@@ -87,7 +89,7 @@ class Player(SentientBeing):
 					if int(item.dex_max) <= ac_bonus_from_dex:
 						ac_bonus_from_dex = int(item.dex_max)
 				sum_items_ac += item.ac
-		total_AC = ac_bonus_from_dex + sum_items_ac
-		self.ac = total_AC if total_AC > 10 else 10 + ac_bonus_from_dex
+		
+		self.ac = sum_items_ac + ac_bonus_from_dex
 
 
