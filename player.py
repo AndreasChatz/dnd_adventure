@@ -68,6 +68,9 @@ class Player(SentientBeing):
 			print('You are not wearing this item.')
 			return
 
+		self.inventory.append(item)
+		self.wearing.remove(item)
+
 
 
 	def calculateAC(self):

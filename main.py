@@ -71,6 +71,10 @@ def main():
 	for x in fighter.wearing:
 		print(x.name)
 	fighter.show_inventory()
+	fighter.doff_item('Chain Mail')
+	fighter.show_inventory()
+	fighter.doff_item('Chain Mail')
+	fighter.show_inventory()
 
 
 
