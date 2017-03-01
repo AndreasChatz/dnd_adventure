@@ -11,7 +11,6 @@ class Player(SentientBeing):
 
 		self.inventory = [items.Scimitar(), items.Dagger(), items.Chain_mail(), items.Shield(), items.Currency("Gold",15)]
 		self.wearing = []
-		self.holding = []
 
 		# 1 arm slot, 1 body slot, 1 foot slot, 2 hand slots, 1 head slot,
 		# 2 ring slots, 1 shoulder slot, 1 waist slot.
@@ -37,8 +36,8 @@ class Player(SentientBeing):
 				return True if self.items_slots.count('hand') < 2 else False		
 
 	# Given the name of an item, return the item object from the inventory.
-	def get_item_given_a_name(self, item_name):
-		for item_inventory in self.inventory:
+	def get_item_given_a_name(self, item_name, fromlist):
+		for item_inventory in fromlist:
 			if (item_inventory.name == item_name):
 				return item_inventory
 		else:
@@ -49,7 +48,7 @@ class Player(SentientBeing):
 			print('All the slots are filled', 
 				'Doff an item from the corresponding slot and try again.')
 
-		item = self.get_item_given_a_name(item_name)
+		item = self.get_item_given_a_name(item_name, self.inventory)
 
 		if (item == None):
 			print('There is no such item in you inventory.')
@@ -58,26 +57,17 @@ class Player(SentientBeing):
 		if (self.is_item_slot_available(item)):
 			self.wearing.append(item)
 			self.items_slots.append(item.slot)
+			self.inventory.remove(item)
 		else:
 			print('Not available slots. Doff an item from the corresponding slot and try again.')
 
-		# self.wearing.append(item)
+	def doff_item(self, item_name):
+		item = self.get_item_given_a_name(item_name, self.wearing)
 
+		if (item == None):
+			print('You are not wearing this item.')
+			return
 
-
-	# def don_item(self, item, don=True):
-	# 	for index, _item in enumerate(self.inventory):
-	# 		if item == _item.name:
-	# 			if _item.hasArmorAttribute():
-	# 				self.wearing.append(_item)
-	# 				self.calculateAC()
-	# 				del(self.inventory[index])
-	# 			elif isinstance(_item, items.Weapon):
-	# 				self.holding.append(_item)
-	# 				del(self.inventory[index])
-	# 			else:
-	# 				print("You cannot don this item.")
-	# 			break
 
 
 	def calculateAC(self):

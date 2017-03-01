@@ -70,6 +70,7 @@ def main():
 	fighter.don_item('Chain Mail')
 	for x in fighter.wearing:
 		print(x.name)
+	fighter.show_inventory()
 
 
 
