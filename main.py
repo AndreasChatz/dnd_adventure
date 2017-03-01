@@ -68,12 +68,15 @@ def main():
 		print(x.name)
 	print('adding Chain Mail')
 	fighter.don_item('Chain Mail')
+	print('AC',fighter.ac)
 	for x in fighter.wearing:
 		print(x.name)
 	fighter.show_inventory()
 	fighter.doff_item('Chain Mail')
+	print('AC',fighter.ac)
 	fighter.show_inventory()
 	fighter.doff_item('Chain Mail')
+	print('AC',fighter.ac)
 	fighter.show_inventory()
 
 

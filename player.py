@@ -58,6 +58,7 @@ class Player(SentientBeing):
 			self.wearing.append(item)
 			self.items_slots.append(item.slot)
 			self.inventory.remove(item)
+			self.calculateAC()
 		else:
 			print('Not available slots. Doff an item from the corresponding slot and try again.')
 
@@ -70,6 +71,7 @@ class Player(SentientBeing):
 
 		self.inventory.append(item)
 		self.wearing.remove(item)
+		self.calculateAC()
 
 
 
