@@ -50,34 +50,46 @@ def main():
 	print("is alive:",fighter.is_alive())
 	fighter.show_inventory()
 	sh = items.Currency("Gold",40)
-	print('adding Scimitar')
-	fighter.don_item('Scimitar')
-	for x in fighter.wearing:
-		print(x.name)
-	print('adding Shield')
+	# print('adding Scimitar')
+	# fighter.don_item('Scimitar')
+	# for x in fighter.wearing:
+	# 	print(x.name)
+	# print('adding Shield')
+	# fighter.don_item('Shield')
+	# for x in fighter.wearing:
+	# 	print(x.name)
+	# print('adding Dagger')
+	# fighter.don_item('Dagger')
+	# for x in fighter.wearing:
+	# 	print(x.name)
+	# print('adding Chain Mail')
+	# fighter.don_item('Chain Mail')
+	# for x in fighter.wearing:
+	# 	print(x.name)
+	# print('adding Chain Mail')
+	# fighter.don_item('Chain Mail')
+	# print('AC',fighter.ac)
+	# for x in fighter.wearing:
+	# 	print(x.name)
+	# fighter.show_inventory()
+	# fighter.doff_item('Chain Mail')
+	print('AC',fighter.ac)
+	fighter.show_inventory()
+	print('don Assassin Suit')
+	fighter.don_item('Assassin Suit')
+	print('AC',fighter.ac)
+	print('doff Assassin Suit')
+	fighter.doff_item('Assassin Suit')
+	print('AC',fighter.ac)
+	print('don Chain Mail')
+	fighter.don_item('Chain Mail')
+	print('AC',fighter.ac)
+	print('don Shield')
 	fighter.don_item('Shield')
-	for x in fighter.wearing:
-		print(x.name)
-	print('adding Dagger')
-	fighter.don_item('Dagger')
-	for x in fighter.wearing:
-		print(x.name)
-	print('adding Chain Mail')
-	fighter.don_item('Chain Mail')
-	for x in fighter.wearing:
-		print(x.name)
-	print('adding Chain Mail')
-	fighter.don_item('Chain Mail')
 	print('AC',fighter.ac)
-	for x in fighter.wearing:
-		print(x.name)
-	fighter.show_inventory()
+	print('doff Chain Mail')
 	fighter.doff_item('Chain Mail')
 	print('AC',fighter.ac)
-	fighter.show_inventory()
-	fighter.doff_item('Chain Mail')
-	print('AC',fighter.ac)
-	fighter.show_inventory()
 
 
 

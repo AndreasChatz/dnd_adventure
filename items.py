@@ -81,6 +81,7 @@ class Shield(Item):
 		self.ac = 2
 		self.type = 'Shield'
 		self.slot = 'hand'
+		self.dex_max = '-'
 		super().__init__(name = "Shield",
 			description = "Shield is a piece of personal armor held in the hand.",
 			value = 10)

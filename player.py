@@ -9,7 +9,7 @@ class Player(SentientBeing):
 			ac=10,hp=12,speed=30,
 			str=16,dex=12,con=16,int=8,wis=14,cha=8)
 
-		self.inventory = [items.Scimitar(), items.Dagger(), items.Chain_mail(), items.Shield(), items.Currency("Gold",15)]
+		self.inventory = [items.Scimitar(), items.Dagger(), items.Chain_mail(), items.AssassinSuit(), items.Shield(), items.Currency("Gold",15)]
 		self.wearing = []
 
 		# 1 arm slot, 1 body slot, 1 foot slot, 2 hand slots, 1 head slot,
@@ -71,23 +71,23 @@ class Player(SentientBeing):
 
 		self.inventory.append(item)
 		self.wearing.remove(item)
+		self.items_slots.remove(item.slot)
 		self.calculateAC()
 
 
 
 	def calculateAC(self):
-		add_items_ac = 0
+		sum_items_ac = 0
 		ac_bonus_from_dex = self.attributeModifier(self.dex)
 		for item in self.wearing:
-			if isinstance(item, items.Armor):
+			if items.Item.hasArmorAttribute(item):
 				if item.dex_max == 0:
 					ac_bonus_from_dex = 0
 				elif item.dex_max != "-":
 					if int(item.dex_max) <= ac_bonus_from_dex:
 						ac_bonus_from_dex = int(item.dex_max)
-
-				add_items_ac += item.ac
-
-		self.ac = ac_bonus_from_dex + add_items_ac
+				sum_items_ac += item.ac
+		total_AC = ac_bonus_from_dex + sum_items_ac
+		self.ac = total_AC if total_AC > 10 else 10 + ac_bonus_from_dex
 
 
