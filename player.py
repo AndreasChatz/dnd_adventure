@@ -77,7 +77,6 @@ class Player(SentientBeing):
 
 
 	def calculateAC(self):
-		# sum_items_ac = 0
 		ac_bonus_from_dex = self.attributeModifier(self.dex)
 		sum_items_ac = 0 if 'body' in self.items_slots else 10
 
