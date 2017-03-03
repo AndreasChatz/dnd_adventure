@@ -10,11 +10,11 @@ class Player(SentientBeing):
 			str=16,dex=12,con=16,int=8,wis=14,cha=8)
 
 		self.inventory = [items.Scimitar(), items.Dagger(), items.Chain_mail(), items.AssassinSuit(), items.Shield(), items.Currency("Gold",15)]
-		self.wearing = []
 
 		# 1 arm slot, 1 body slot, 1 foot slot, 2 hand slots, 1 head slot,
 		# 2 ring slots, 1 shoulder slot, 1 waist slot.
-		self.items_slots = []
+		self.wearing = {"arm":"", "body":"", "foot": "", "r_hand":"", "l_hand":"",
+							"head":"", "ring_1":"", "ring_2":"", "shoulder":"", "waist":""}
 
 	def is_alive(self):
 		return self.hp > 0
@@ -25,28 +25,22 @@ class Player(SentientBeing):
 		print()
 
 	def is_item_slot_available(self, item):
-		item_class_name = item.__class__.__name__
-		wearing_items_class_names = [x.__class__.__name__ for x in self.wearing]
-		if (item.slot not in self.items_slots):
-			return True
-		else:
-			if (isinstance(item, items.Shield)):
-				return True if item_class_name not in wearing_items_class_names and self.items_slots.count('hand') < 2 else False
-			elif (isinstance(item, items.Weapon)):
-				return True if self.items_slots.count('hand') < 2 else False		
+		return self.wearing[item.slot] == ""		
 
 	# Given the name of an item, return the item object from the inventory.
-	def get_item_given_a_name(self, item_name, fromlist):
-		for item_inventory in fromlist:
-			if (item_inventory.name == item_name):
-				return item_inventory
-		else:
-			return None
+	def get_item_given_a_name(self, item_name, from_data):
+
+		# from_data could be the inventory list or the wearing dictionary.
+		# if it is a dictionary copy the non string values (only the items)
+		# to the data list
+		data = [x for x in from_data.values() if x!= ""] if isinstance(from_data, dict) else from_data
+
+		for item in data:
+			if (item.name == item_name):
+				return item
+		return None
 
 	def don_item(self, item_name):
-		if (len(self.wearing) > 10):
-			print('All the slots are filled', 
-				'Doff an item from the corresponding slot and try again.')
 
 		item = self.get_item_given_a_name(item_name, self.inventory)
 
@@ -55,12 +49,11 @@ class Player(SentientBeing):
 			return
 
 		if (self.is_item_slot_available(item)):
-			self.wearing.append(item)
-			self.items_slots.append(item.slot)
+			self.wearing[item.slot] = item
 			self.inventory.remove(item)
 			self.calculateAC()
 		else:
-			print('Not available slots. Doff an item from the corresponding slot and try again.')
+			print('Not available slot. Doff an item from the corresponding slot and try again.')
 
 	def doff_item(self, item_name):
 		item = self.get_item_given_a_name(item_name, self.wearing)
@@ -69,18 +62,15 @@ class Player(SentientBeing):
 			print('You are not wearing this item.')
 			return
 
+		self.wearing[item.slot] = ""
 		self.inventory.append(item)
-		self.wearing.remove(item)
-		self.items_slots.remove(item.slot)
 		self.calculateAC()
-
-
 
 	def calculateAC(self):
 		ac_bonus_from_dex = self.attributeModifier(self.dex)
-		sum_items_ac = 0 if 'body' in self.items_slots else 10
+		sum_items_ac = 0 if self.wearing['body'] !="" else 10
 
-		for item in self.wearing:
+		for item in self.wearing.values():
 			if items.Item.hasArmorAttribute(item):
 				if item.dex_max == 0:
 					ac_bonus_from_dex = 0
@@ -90,5 +80,22 @@ class Player(SentientBeing):
 				sum_items_ac += item.ac
 		
 		self.ac = sum_items_ac + ac_bonus_from_dex
+
+
+
+	# def calculateAC(self):
+	# 	ac_bonus_from_dex = self.attributeModifier(self.dex)
+	# 	sum_items_ac = 0 if 'body' in self.items_slots else 10
+
+	# 	for item in self.wearing:
+	# 		if items.Item.hasArmorAttribute(item):
+	# 			if item.dex_max == 0:
+	# 				ac_bonus_from_dex = 0
+	# 			elif item.dex_max != "-":
+	# 				if int(item.dex_max) <= ac_bonus_from_dex:
+	# 					ac_bonus_from_dex = int(item.dex_max)
+	# 			sum_items_ac += item.ac
+		
+	# 	self.ac = sum_items_ac + ac_bonus_from_dex
 
 

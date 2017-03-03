@@ -46,7 +46,7 @@ class Weapon(Item):
 	def __init__(self, name, description, value, damage, type):
 		self.damage = damage
 		self.type = type
-		self.slot = 'hand'
+		self.slot = 'r_hand'
 		super(Weapon, self).__init__(name, description, value)
 
 	def __str__(self):
@@ -80,7 +80,7 @@ class Shield(Item):
 		Shield._count += 1
 		self.ac = 2
 		self.type = 'Shield'
-		self.slot = 'hand'
+		self.slot = 'l_hand'
 		self.dex_max = '-'
 		super().__init__(name = "Shield",
 			description = "Shield is a piece of personal armor held in the hand.",
