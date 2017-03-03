@@ -20,14 +20,14 @@ class Player(SentientBeing):
 		return self.hp > 0
 
 	def show_inventory(self):
-		for item in self.inventory:
+		for item in reversed(self.inventory):
 			print(f"{item.name}({item._count})", end="")
 		print()
 
 	def is_item_slot_available(self, item):
 		return self.wearing[item.slot] == ""		
 
-	# Given the name of an item, return the item object from the inventory.
+	# Given the name of an item, return the item object from the inventory or wearing.
 	def get_item_given_a_name(self, item_name, from_data):
 
 		# from_data could be the inventory list or the wearing dictionary.
@@ -80,22 +80,3 @@ class Player(SentientBeing):
 				sum_items_ac += item.ac
 		
 		self.ac = sum_items_ac + ac_bonus_from_dex
-
-
-
-	# def calculateAC(self):
-	# 	ac_bonus_from_dex = self.attributeModifier(self.dex)
-	# 	sum_items_ac = 0 if 'body' in self.items_slots else 10
-
-	# 	for item in self.wearing:
-	# 		if items.Item.hasArmorAttribute(item):
-	# 			if item.dex_max == 0:
-	# 				ac_bonus_from_dex = 0
-	# 			elif item.dex_max != "-":
-	# 				if int(item.dex_max) <= ac_bonus_from_dex:
-	# 					ac_bonus_from_dex = int(item.dex_max)
-	# 			sum_items_ac += item.ac
-		
-	# 	self.ac = sum_items_ac + ac_bonus_from_dex
-
-
