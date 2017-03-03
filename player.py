@@ -1,6 +1,7 @@
 from sentientBeings import SentientBeing
 import items
 import world
+import sys
 
 class Player(SentientBeing):	
 	"""Player class"""
@@ -26,6 +27,9 @@ class Player(SentientBeing):
 		action_method = getattr(self, action.method.__name__)
 		if action_method:
 			action_method(**kwargs)
+
+	def quit(self):
+		sys.exit('Thanks for playing')
 
 	def move(self, dx, dy):
 		self.location_x += dx
