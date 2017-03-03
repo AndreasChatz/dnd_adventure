@@ -22,6 +22,11 @@ class Player(SentientBeing):
 	def is_alive(self):
 		return self.hp > 0
 
+	def do_action(self, action, **kwargs):
+		action_method = getattr(self, action.method.__name__)
+		if action_method:
+			action_method(**kwargs)
+
 	def move(self, dx, dy):
 		self.location_x += dx
 		self.loaction_y += dy
