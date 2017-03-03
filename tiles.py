@@ -12,7 +12,6 @@ class MapTile(object):
 	def intro_text(self):
 		raise NotImplementedError()
 
-	def 
 
 
 class StartingRoom(MapTile):
