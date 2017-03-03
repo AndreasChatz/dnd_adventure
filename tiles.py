@@ -1,5 +1,7 @@
 import items
 import sentientBeings
+import actions
+import world
 import textwrap
 
 
@@ -12,7 +14,25 @@ class MapTile(object):
 	def intro_text(self):
 		raise NotImplementedError()
 
+	def adjacent_move(self):
+		"""Returns all move actions for adjacent tiles."""
+		moves = []
+		if world.tile_exists(self.x + 1, self.y):
+			moves.append(actions.MoveEast())
+		if world.tile_exists(self.x - 1, self.y):
+			moves.append(actions.MoveWest())
+		if world.tile_exists(self.x, self.y -1):
+			moves.append(actions.MoveNorth)
+		if world.tile_exists(self.x, self.y + 1):
+			moves.append(actions.MoveSouth)
+		return moves
 
+	def available_actions(self):
+		"""Returns all of the available actions in this room."""
+		moves = self.adjacent_move()
+		moves.append(actions.ViewInventory())
+
+		return moves
 
 class StartingRoom(MapTile):
 	def intro_text(self):
