@@ -1,5 +1,6 @@
 from sentientBeings import SentientBeing
 import items
+import world
 
 class Player(SentientBeing):	
 	"""Player class"""
@@ -15,6 +16,8 @@ class Player(SentientBeing):
 		# 2 ring slots, 1 shoulder slot, 1 waist slot.
 		self.wearing = {"arm":"", "body":"", "foot": "", "r_hand":"", "l_hand":"",
 							"head":"", "ring_1":"", "ring_2":"", "shoulder":"", "waist":""}
+
+		self.location_x, self.loaction_y = world.starting_position
 
 	def is_alive(self):
 		return self.hp > 0

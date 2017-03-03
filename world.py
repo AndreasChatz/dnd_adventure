@@ -6,7 +6,7 @@ def load_tiles():
 	with open('resources/map.csv', 'r') as f:
 		rows = f.readlines()
 		# print(len(rows))
-	x_max = len(rows[0].split(',')) # Assumes all rows contain the same number of tabs
+	x_max = len(rows[0].split(',')) # Assumes all rows contain the same number of commas
 	# print(x_max)
 	for y in range(len(rows)):
 		cols = rows[y].split(',')
