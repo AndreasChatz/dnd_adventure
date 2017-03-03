@@ -18,7 +18,7 @@ class Player(SentientBeing):
 		self.wearing = {"arm":"", "body":"", "foot": "", "r_hand":"", "l_hand":"",
 							"head":"", "ring_1":"", "ring_2":"", "shoulder":"", "waist":""}
 
-		self.location_x, self.loaction_y = world.starting_position
+		self.location_x, self.location_y = world.starting_position
 
 	def is_alive(self):
 		return self.hp > 0
@@ -31,10 +31,6 @@ class Player(SentientBeing):
 	def quit(self):
 		sys.exit('Thanks for playing')
 
-	def move(self, dx, dy):
-		self.location_x += dx
-		self.loaction_y += dy
-		print(world.tile_exists(self.location_x, self.loaction_y).intro_text())
 
 	def move_north(self):
 		self.move(dx=0, dy=-1)
@@ -47,6 +43,12 @@ class Player(SentientBeing):
 
 	def move_west(self):
 		self.move(dx=-1, dy=0)
+
+	def move(self, dx, dy):
+		self.location_x += dx
+		self.location_y += dy
+		print(world.tile_exists(self.location_x, self.location_y).intro_text())
+
 
 	def show_inventory(self):
 		for item in reversed(self.inventory):

@@ -22,15 +22,16 @@ class MapTile(object):
 		if world.tile_exists(self.x - 1, self.y):
 			moves.append(actions.MoveWest())
 		if world.tile_exists(self.x, self.y -1):
-			moves.append(actions.MoveNorth)
+			moves.append(actions.MoveNorth())
 		if world.tile_exists(self.x, self.y + 1):
-			moves.append(actions.MoveSouth)
+			moves.append(actions.MoveSouth())
 		return moves
 
 	def available_actions(self):
 		"""Returns all of the available actions in this room."""
 		moves = self.adjacent_move()
 		moves.append(actions.ViewInventory())
+		moves.append(actions.Quit())
 
 		return moves
 
@@ -38,5 +39,7 @@ class StartingRoom(MapTile):
 	def intro_text(self):
 		return textwrap.fill("You are outside of a cave. In front of you there are several human skulls impaled with wooden sticks. This must be the orc lair you are looking for.")
 
-a = StartingRoom(0,1)
-print(a.intro_text())
+
+class CaveFirstRoom(MapTile):
+	def intro_text(self):
+		return textwrap.fill("It's too dark to see.")
